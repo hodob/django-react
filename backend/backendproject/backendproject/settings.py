@@ -39,9 +39,12 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     'api',
     'rest_framework',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',  # CORS 추가
+    'django.middleware.common.CommonMiddleware',  # CORS 추가
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -52,6 +55,10 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = "backendproject.urls"
+
+CORS_ORIGIN_WHITELIST = (
+    'http://127.0.0.1:8000', 'http://localhost:3000')
+CORS_ALLOW_CREDENTIALS = True
 
 TEMPLATES = [
     {
