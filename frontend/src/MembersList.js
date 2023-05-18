@@ -76,7 +76,7 @@ export default class MembersList extends Component {
                 <table className="table is-striped">
                     <thead>
                         <tr>
-                            <th>#</th>
+                            <th>##</th>
                             <th>Name</th>
                             <th>Accout</th>
                             <th>Password</th>

@@ -18,20 +18,23 @@ const BaseLayout = () => (
 
       <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div className="navbar-nav">
-          <a className="nav-item nav-link" href="/">MEMBERS</a>
+          <a className="nav-item nav-link" href="/">MEMBERStest1</a>
           <a className="nav-item nav-link" href="/member">CREATE MEMBER</a>
         </div>
       </div>
-
+      
     </nav>  
-
+    <div>test</div>
     <div className="content">
+    <div>test4</div>
       <Route path="/" exact component={MembersList} />
+      <div>test5</div>
       <Route path="/member/:pk"  component={MemberCreateUpdate} />
+      <div>test6</div>
       <Route path="/member/" exact component={MemberCreateUpdate} />
-
+      <div>test3</div>
     </div>
-
+    <div>test2</div>
   </div>
 )
 
