@@ -16,11 +16,7 @@ function App() {
       // .then((response) => console.log(response));
       .then((response) => setText(JSON.stringify(response.data)));
   };
-  const test = (
-    <div>
-      hi
-    </div>
-  );
+  const test = (<div>test</div>);
 
   return (
     // <div className="App">
@@ -42,6 +38,7 @@ function App() {
         <div>
       <h1>{text}</h1>
       <button onClick={clicked}>클릭</button>
+      <button onClick={test}>클릭2</button>
       {test}
     </div>
   );
