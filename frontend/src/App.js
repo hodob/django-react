@@ -16,22 +16,23 @@ function App() {
         params: {
           abc: "가나다",
         },
-        // headers:{
-        //   'csrftoken':csrf_token
-        // }
+
       })
       // .then((response) => console.log(response));
-      .then((response) => setText(JSON.stringify(response.data)))
-      ;
+      .then((response) => setText(JSON.stringify(response.data)))      ;
     
+  };
+  const clicked2 = () => {
+    axios
+      .get("http://127.0.0.1:8000/api", {
+        params: {
+          abc: "가나다",
+        },
 
-    // console.log(csrf_token);
-    // axios.get('api',{
-    //   params:{abs:"가나다"},
-    //   headers:{
-    //     test:123,
-    //   },
-    // })
+      })
+      // .then((response) => console.log(response));
+      .then((response) => setText(JSON.stringify(response.data)))      ;
+    
   };
 
 
@@ -41,6 +42,7 @@ function App() {
     <div>
       <h1>{text}</h1>
       <button onClick={clicked}>클릭</button>
+      <button onClick={clicked2}>클릭</button>
     </div>
   );
 }
