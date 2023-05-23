@@ -6,6 +6,8 @@ from django.shortcuts import render
 from rest_framework.response import Response
 # from rest_framework.decorators import api_view
 from rest_framework.views import APIView
+from .models import DjangoMigrations
+
 
 
 # def main(request):
@@ -23,4 +25,8 @@ class main3(APIView):
     def get(self, request, format=None):
         message = "2"
         print(message+'테스트')
+        dto=DjangoMigrations.objects.all()
+        for i in dto:
+            print(i.id)
+
         return Response(message)

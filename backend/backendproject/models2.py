@@ -1,53 +1,11 @@
+# This is an auto-generated Django model module.
+# You'll have to do the following manually to clean this up:
+#   * Rearrange models' order
+#   * Make sure each model has one field with primary_key=True
+#   * Make sure each ForeignKey and OneToOneField has `on_delete` set to the desired behavior
+#   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
+# Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
-
-# Create your models here.
-class test(models.Model):
-    idx=models.AutoField(primary_key=True)
-    test1 = models.CharField(max_length=200)
-
-    
-
-    # class Meta:
-    #     verbose_name = _("")
-    #     verbose_name_plural = _("s")
-
-    # def __str__(self):
-    #     return self.name
-
-    # def get_absolute_url(self):
-    #     return reverse("_detail", kwargs={"pk": self.pk})
-class Dummy(models.Model):
-
-    idx=models.AutoField(primary_key=True)
-    test1 = models.CharField(max_length=200)
-
-    class Meta:
-        verbose_name = ("Dummy")
-        verbose_name_plural = ("Dummys")
-        db_table = 'dummy'
-
-    # def __str__(self):
-    #     return self.nametest
-
-    # def get_absolute_url(self):
-    #     return reverse("Dummy_detail", kwargs={"pk": self.pk})
-
-# class django_migrations(models.Model):
-#     id=models.AutoField(primary_key=True, null=False)
-#     app=models.CharField(max_length=255,null=False)
-#     name=models.CharField(max_length=255,null=False)
-#     applied=models.DateTimeField()
-
-    
-
-#     class Meta:
-#         db_table = 'django_migrations'
-
-#     # def __str__(self):
-#     #     return self.name
-
-#     # def get_absolute_url(self):
-#     #     return reverse("_detail", kwargs={"pk": self.pk})
 
 
 class ApiTest(models.Model):
@@ -155,7 +113,7 @@ class DjangoMigrations(models.Model):
     applied = models.DateTimeField()
 
     class Meta:
-        managed = True
+        managed = False
         db_table = 'django_migrations'
 
 
@@ -169,3 +127,17 @@ class DjangoSession(models.Model):
         db_table = 'django_session'
 
 
+class Dummy(models.Model):
+    idx = models.AutoField(primary_key=True)
+    test1 = models.CharField(max_length=200)
+
+    class Meta:
+        managed = False
+        db_table = 'dummy'
+
+
+class Wal(models.Model):
+
+    class Meta:
+        managed = False
+        db_table = 'wal'
