@@ -2,25 +2,36 @@ import logo from './logo.svg';
 import './App.css';
 import React, { useState } from "react";
 import axios from "axios";
-import CSRFToken from './csrftoken';
+import Cookies from 'js-cookie';
+
 
 function App() {
   
-
-  // axios.defaults.xsrfCookieName = 'csrftoken';
-  // axios.defaults.xsrfHeaderName = 'X-CSRFToken';
   const [text, setText] = useState("없음");
-  <CSRFToken />
+  // const csrf_token = Cookies.get('CSRF-Token-2NGYY');
+
   const clicked = () => {
     axios
       .get("http://127.0.0.1:8000", {
         params: {
           abc: "가나다",
         },
+        // headers:{
+        //   'csrftoken':csrf_token
+        // }
       })
       // .then((response) => console.log(response));
       .then((response) => setText(JSON.stringify(response.data)))
       ;
+    
+
+    // console.log(csrf_token);
+    // axios.get('api',{
+    //   params:{abs:"가나다"},
+    //   headers:{
+    //     test:123,
+    //   },
+    // })
   };
 
 
