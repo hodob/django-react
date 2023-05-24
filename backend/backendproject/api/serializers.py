@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import DjangoMigrations
+from .models import DjangoMigrations, DjangoContentType
 
 """
 # ModelSerializer 나중에 사용
@@ -27,3 +27,8 @@ class DjangoMigrationsSerializers(serializers.ModelSerializer):
     class Meta:
         model = DjangoMigrations
         fields = ['id', 'app', 'name', 'applied']
+
+class DjangoContentTypeSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = DjangoContentType
+        fields = ['id', 'app_label', 'model']
