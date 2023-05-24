@@ -12,7 +12,7 @@ function App() {
 
   const clicked = () => {
     axios
-      .get("http://127.0.0.1:8000", {
+      .get("http://127.0.0.1:8001", {
         params: {
           abc: "가나다",
         },
@@ -24,7 +24,7 @@ function App() {
   };
   const clicked2 = () => {
     axios
-      .get("http://127.0.0.1:8000/api", {
+      .get("http://127.0.0.1:8001/api", {
         params: {
           abc: "가나다",
         },
@@ -36,7 +36,7 @@ function App() {
   };
   const clicked3 = () => {
     axios
-      .get("http://127.0.0.1:8000/api2", {
+      .get("http://127.0.0.1:8001/api2", {
         params: {
           abc: "가나다",
         },
