@@ -94,8 +94,8 @@ DATABASES = {
         "NAME": "chapter12",
         "USER": "postgres",
         "PASSWORD": "wjdgh7578@",
-        "HOST": "192.168.1.11",
-        # "HOST": "jjjteam.ducknds.org",
+        # "HOST": "192.168.1.11",
+        "HOST": "jjjteam.duckdns.org",
         "PORT": "5432",
     }
 }
