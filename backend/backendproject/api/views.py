@@ -4,7 +4,6 @@ from django.shortcuts import render
 
 from django.http import HttpResponse,JsonResponse
 from rest_framework.response import Response
-# from rest_framework.decorators import api_view
 from rest_framework.views import APIView
 from .models import DjangoMigrations
 from .serializers import DjangoMigrationsSerializers
@@ -12,18 +11,7 @@ from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
 
 
-
-# def main(request):
-#     message = request.GET.get('abc')
-#     print(message)
-
-#     return HttpResponse("안녕?")
-
-# @api_view(['GET'])
-# def main2(request):
-#     message= "1"
-#     return Response(message)
-
+#  단순 숫자만 바꾸는거
 class main3(APIView):
     def get(self, request, format=None):
         message = "2"
@@ -38,6 +26,7 @@ class main3(APIView):
         #     print(DjangoMigrationsSerializers(i))
 
         return Response(message)
+    
 @csrf_exempt
 def main4(request):
     """
@@ -56,3 +45,12 @@ def main4(request):
     #         return JsonResponse(serializer.data, status=201)
     #     return JsonResponse(serializer.errors, status=400)
     
+    
+# main3 클래스에서 json 타입으로 반환
+class main5(APIView):
+    def get(self, request, format=None):
+        snippets = DjangoMigrations.objects.all()
+        serializer = DjangoMigrationsSerializers(snippets, many=True)
+        return JsonResponse(serializer.data, safe=False)
+    
+
