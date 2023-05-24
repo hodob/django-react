@@ -46,6 +46,18 @@ function App() {
       .then((response) => setText(JSON.stringify(response.data)))      ;
     
   };
+  const clicked4 = () => {
+    axios
+      .get("http://127.0.0.1:8000/api3", {
+        params: {
+          abc: "가나다",
+        },
+
+      })
+      // .then((response) => console.log(response));
+      .then((response) => setText(JSON.stringify(response.data)))      ;
+    
+  };
 
 
   return (
@@ -56,6 +68,7 @@ function App() {
       <button onClick={clicked}>클릭기본데이터</button>
       <button onClick={clicked2}>클릭초데이터</button>
       <button onClick={clicked3}>api5</button>
+      <button onClick={clicked4}>다른데이터가져고이</button>
     </div>
   );
 }

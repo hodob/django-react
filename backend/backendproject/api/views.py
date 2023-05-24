@@ -5,8 +5,8 @@ from django.shortcuts import render
 from django.http import HttpResponse,JsonResponse
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from .models import DjangoMigrations
-from .serializers import DjangoMigrationsSerializers
+from .models import DjangoMigrations ,DjangoContentType
+from .serializers import DjangoMigrationsSerializers, DjangoContentTypeSerializers
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
 
@@ -53,4 +53,9 @@ class main5(APIView):
         serializer = DjangoMigrationsSerializers(snippets, many=True)
         return JsonResponse(serializer.data, safe=False)
     
-
+# 다른테이블 가져오는거 readonly
+class main6(APIView):
+    def get(self, request, format=None):
+        snippets = DjangoContentType.objects.all()
+        serializer = DjangoContentTypeSerializers(snippets, many=True)
+        return JsonResponse(serializer.data, safe=False)
