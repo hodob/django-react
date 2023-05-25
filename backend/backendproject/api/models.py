@@ -1,62 +1,11 @@
+# This is an auto-generated Django model module.
+# You'll have to do the following manually to clean this up:
+#   * Rearrange models' order
+#   * Make sure each model has one field with primary_key=True
+#   * Make sure each ForeignKey and OneToOneField has `on_delete` set to the desired behavior
+#   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
+# Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
-
-# Create your models here.
-class test(models.Model):
-    idx=models.AutoField(primary_key=True)
-    test1 = models.CharField(max_length=200)
-
-    
-
-    # class Meta:
-    #     verbose_name = _("")
-    #     verbose_name_plural = _("s")
-
-    # def __str__(self):
-    #     return self.name
-
-    # def get_absolute_url(self):
-    #     return reverse("_detail", kwargs={"pk": self.pk})
-class Dummy(models.Model):
-
-    idx=models.AutoField(primary_key=True)
-    test1 = models.CharField(max_length=200)
-
-    class Meta:
-        verbose_name = ("Dummy")
-        verbose_name_plural = ("Dummys")
-        db_table = 'dummy'
-
-    # def __str__(self):
-    #     return self.nametest
-
-    # def get_absolute_url(self):
-    #     return reverse("Dummy_detail", kwargs={"pk": self.pk})
-
-# class django_migrations(models.Model):
-#     id=models.AutoField(primary_key=True, null=False)
-#     app=models.CharField(max_length=255,null=False)
-#     name=models.CharField(max_length=255,null=False)
-#     applied=models.DateTimeField()
-
-    
-
-#     class Meta:
-#         db_table = 'django_migrations'
-
-#     # def __str__(self):
-#     #     return self.name
-
-#     # def get_absolute_url(self):
-#     #     return reverse("_detail", kwargs={"pk": self.pk})
-
-
-class ApiTest(models.Model):
-    idx = models.AutoField(primary_key=True)
-    test1 = models.CharField(max_length=200)
-
-    class Meta:
-        managed = False
-        db_table = 'api_test'
 
 
 class AuthGroup(models.Model):
@@ -68,6 +17,7 @@ class AuthGroup(models.Model):
 
 
 class AuthGroupPermissions(models.Model):
+    id = models.BigAutoField(primary_key=True)
     group = models.ForeignKey(AuthGroup, models.DO_NOTHING)
     permission = models.ForeignKey('AuthPermission', models.DO_NOTHING)
 
@@ -93,7 +43,7 @@ class AuthUser(models.Model):
     last_login = models.DateTimeField(blank=True, null=True)
     is_superuser = models.BooleanField()
     username = models.CharField(unique=True, max_length=150)
-    first_name = models.CharField(max_length=30)
+    first_name = models.CharField(max_length=150)
     last_name = models.CharField(max_length=150)
     email = models.CharField(max_length=254)
     is_staff = models.BooleanField()
@@ -106,6 +56,7 @@ class AuthUser(models.Model):
 
 
 class AuthUserGroups(models.Model):
+    id = models.BigAutoField(primary_key=True)
     user = models.ForeignKey(AuthUser, models.DO_NOTHING)
     group = models.ForeignKey(AuthGroup, models.DO_NOTHING)
 
@@ -116,6 +67,7 @@ class AuthUserGroups(models.Model):
 
 
 class AuthUserUserPermissions(models.Model):
+    id = models.BigAutoField(primary_key=True)
     user = models.ForeignKey(AuthUser, models.DO_NOTHING)
     permission = models.ForeignKey(AuthPermission, models.DO_NOTHING)
 
@@ -150,52 +102,28 @@ class DjangoContentType(models.Model):
 
 
 class DjangoMigrations(models.Model):
+    id = models.BigAutoField(primary_key=True)
     app = models.CharField(max_length=255)
     name = models.CharField(max_length=255)
     applied = models.DateTimeField()
 
     class Meta:
-        managed = True
+        managed = False
         db_table = 'django_migrations'
 
 
-class DjangoSession(models.Model):
-    session_key = models.CharField(primary_key=True, max_length=40)
-    session_data = models.TextField()
-    expire_date = models.DateTimeField()
+class InuObsMi(models.Model):
+    pk_id = models.AutoField(primary_key=True)
+    id = models.BigIntegerField()
+    obs_time = models.DateTimeField()
+    pow = models.DecimalField(max_digits=10, decimal_places=5, blank=True, null=True)  # max_digits and decimal_places have been guessed, as this database handles decimal fields as float
+    temp = models.DecimalField(max_digits=10, decimal_places=5, blank=True, null=True)  # max_digits and decimal_places have been guessed, as this database handles decimal fields as float
+    mb = models.DecimalField(max_digits=10, decimal_places=5, blank=True, null=True)  # max_digits and decimal_places have been guessed, as this database handles decimal fields as float
+    mb_std = models.DecimalField(max_digits=10, decimal_places=5, blank=True, null=True)  # max_digits and decimal_places have been guessed, as this database handles decimal fields as float
+    delta = models.DecimalField(max_digits=10, decimal_places=5, blank=True, null=True)  # max_digits and decimal_places have been guessed, as this database handles decimal fields as float
+    vi_time = models.DateTimeField(blank=True, null=True)
+    inu_depth = models.DecimalField(max_digits=10, decimal_places=5, blank=True, null=True)  # max_digits and decimal_places have been guessed, as this database handles decimal fields as float
 
     class Meta:
         managed = False
-        db_table = 'django_session'
-
-class WalObsvtInfo(models.Model):
-    obscd = models.IntegerField(blank=True, null=True)
-    addr = models.TextField(blank=True, null=True)
-    bbsncd = models.TextField(blank=True, null=True)
-    bedslp = models.IntegerField(blank=True, null=True)
-    bsnara = models.FloatField(blank=True, null=True)
-    gdt = models.FloatField(blank=True, null=True)
-    lat = models.TextField(blank=True, null=True)
-    lon = models.TextField(blank=True, null=True)
-    mggvcd = models.TextField(blank=True, null=True)
-    mxgrd = models.FloatField(blank=True, null=True)
-    obskdcd = models.TextField(blank=True, null=True)
-    obsnm = models.TextField(blank=True, null=True)
-    obsnmeng = models.TextField(blank=True, null=True)
-    obsopndt = models.TextField(blank=True, null=True)
-    olendobsdh = models.IntegerField(blank=True, null=True)
-    olstartobsdh = models.IntegerField(blank=True, null=True)
-    rivnm = models.TextField(blank=True, null=True)
-    rvmjctdis = models.FloatField(blank=True, null=True)
-    rvwdt = models.IntegerField(blank=True, null=True)
-    sbsncd = models.IntegerField(blank=True, null=True)
-    siendobsdh = models.IntegerField(blank=True, null=True)
-    sistartobsdh = models.IntegerField(blank=True, null=True)
-    tdeyn = models.TextField(blank=True, null=True)
-    tmx = models.IntegerField(blank=True, null=True)
-    tmy = models.IntegerField(blank=True, null=True)
-    wlobscd = models.IntegerField(blank=True, null=True)
-    wltel = models.FloatField(blank=True, null=True)
-    wsrdis = models.TextField(blank=True, null=True)
-    lat_md = models.FloatField(blank=True, null=True)
-    lon_md = models.FloatField(blank=True, null=True)
+        db_table = 'inu_obs_mi'
