@@ -9,22 +9,21 @@ from rest_framework.views import APIView
 # from .serializers import *
 # from django.views.decorators.csrf import csrf_exempt
 # from rest_framework.parsers import JSONParser
-from django.db import connection
-import psycopg
-db = psycopg.connect(host='jjjteam.duckdns.org',dbname='tp_db',user='postgres',password='wjdgh7578@',port=5432)
 
+import psycopg
+conn = psycopg.connect(host='jjjteam.duckdns.org',dbname='tp_db',user='postgres',password='wjdgh7578@',port=5432)
+cur=conn.cursor()
+cur.execute("SELECT * FROM public.inu_obs_mi ORDER BY pk_id ASC LIMIT 100")
 
 #  단순 숫자만 바꾸는거
 class inu_obs_mi_data(APIView):
     def get(self, request, format=None):
         message = "2"
-        return Response(message)
+        print(cur)
+        return Response(cur)
     
     
-    
-    
-    
-    
+
     
 # class main3(APIView):
 #     def get(self, request, format=None):
