@@ -1,21 +1,31 @@
-from django.shortcuts import render
+# from django.shortcuts import render
 
 # Create your views here.
 
-from django.http import HttpResponse,JsonResponse
+# from django.http import HttpResponse,JsonResponse
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from .models import *
-from .serializers import *
-from django.views.decorators.csrf import csrf_exempt
-from rest_framework.parsers import JSONParser
+# from .models import *
+# from .serializers import *
+# from django.views.decorators.csrf import csrf_exempt
+# from rest_framework.parsers import JSONParser
+from django.db import connection
+import psycopg
+db = psycopg.connect(host='jjjteam.duckdns.org',dbname='tp_db',user='postgres',password='wjdgh7578@',port=5432)
 
 
 #  단순 숫자만 바꾸는거
-class main3(APIView):
+class inu_obs_mi_data(APIView):
     def get(self, request, format=None):
         message = "2"
         return Response(message)
+    
+    
+    
+    
+    
+    
+    
 # class main3(APIView):
 #     def get(self, request, format=None):
 #         message = "2"
