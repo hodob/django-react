@@ -12,6 +12,10 @@ from rest_framework.parsers import JSONParser
 
 
 #  단순 숫자만 바꾸는거
+class main3(APIView):
+    def get(self, request, format=None):
+        message = "2"
+        return Response(message)
 # class main3(APIView):
 #     def get(self, request, format=None):
 #         message = "2"
