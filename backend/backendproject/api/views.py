@@ -13,12 +13,15 @@ from rest_framework.views import APIView
 
 import psycopg
 conn = psycopg.connect(host='jjjteam.duckdns.org',dbname='tp_db',user='postgres',password='wjdgh7578@',port=5432)
-cur=conn.cursor()
+
 
 
 #  단순 숫자만 바꾸는거
 class inu_obs_mi_data(APIView):
+    
+    
     def get(self, request, format=None):
+        cur=conn.cursor()
         message = "2"
         print(cur.execute("SELECT * FROM public.inu_obs_mi ORDER BY pk_id ASC LIMIT 100"))
         return Response(cur)
@@ -26,18 +29,30 @@ class inu_obs_mi_data(APIView):
 
 class api_test(APIView):
     def get(self, request, format=None):
+        cur=conn.cursor()
+        cur2=conn.cursor()
         tm1 = request.GET['tm1']
         tm2 = request.GET['tm2']
         # select_data = str("SELECT * FROM public.inu_obs_mi ORDER BY pk_id ASC LIMIT 100  " %(tm1))
         select_data = str("SELECT * FROM public.inu_obs_mi WHERE obs_time BETWEEN '%s' AND '%s' ; " %(tm1,tm2))
         # SELECT * FROM public.inu_obs_mi WHERE obs_time BETWEEN '2022-07-22 17:50:45.629947' AND '2022-07-22 17:51:35.803452' ;
-        print(select_data)
-        cur.execute(select_data)
-        results = [dict((cur.description[i][0], value) for i, value in enumerate(row))  for row in cur.fetchall()]
-        if results != None and len(results) > 0:   
-            result = results[0]
-        print(result)
-        return Response(result)
+        cur.execute(select_data).fetchall()
+        dbColumnCount = cur2.execute("SELECT count(*) AS column_count FROM information_schema.columns WHERE table_schema = 'public' AND table_name = 'inu_obs_mi';").fetchall()
+        print("@@@@@@@@@@@@@@@")
+        print(cur)
+        
+        # print(type(dbColumnCount.description))
+        # for i in dbColumnCount.description:
+        #     print("@@@@@@@@@@@")
+        #     print(type(i))
+        #     print(i.)
+        #     print("###########")
+        # print(dbColumnCount.description[0][1])
+        # for i in dbColumnCount:
+        #     print(i[0])
+        # for i in cur2:
+        #     print(cur.description[i][0])
+        return Response(cur)
     
     
 
