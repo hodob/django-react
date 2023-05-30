@@ -12,6 +12,7 @@ from rest_framework.views import APIView
 # from .dbconn import cursor2
 
 import psycopg
+import json, datetime
 conn = psycopg.connect(host='jjjteam.duckdns.org',dbname='tp_db',user='postgres',password='wjdgh7578@',port=5432)
 
 
@@ -36,10 +37,38 @@ class api_test(APIView):
         # select_data = str("SELECT * FROM public.inu_obs_mi ORDER BY pk_id ASC LIMIT 100  " %(tm1))
         select_data = str("SELECT * FROM public.inu_obs_mi WHERE obs_time BETWEEN '%s' AND '%s' ; " %(tm1,tm2))
         # SELECT * FROM public.inu_obs_mi WHERE obs_time BETWEEN '2022-07-22 17:50:45.629947' AND '2022-07-22 17:51:35.803452' ;
-        cur.execute(select_data).fetchall()
-        dbColumnCount = cur2.execute("SELECT count(*) AS column_count FROM information_schema.columns WHERE table_schema = 'public' AND table_name = 'inu_obs_mi';").fetchall()
+        cur.execute(select_data)
+        cur2.execute(select_data)
+        # dbColumnCount = cur2.execute("SELECT count(*) AS column_count FROM information_schema.columns WHERE table_schema = 'public' AND table_name = 'inu_obs_mi';")
+        # print("@@@@@@@@@@@@@@@")
+        data = cur.fetchall()
+        # print(data)
+
+        # Convert the data to a list of dictionaries
+        columns = [desc[0] for desc in cur.description]
+        data_dicts = [dict(zip(columns, row)) for row in data]
+        test_count = 0
+        for row in data:
+            row_list = list(row)
+            for i in row_list:
+                # if type(i) is datetime.datetime:
+                #     row_list[row_list.index(i)]=str(i)
+                row_list[row_list.index(i)]=str(i)
+            row=tuple(row_list)
+            print(row)
+            data_dicts2 = dict(zip(columns, row))
+        print(data_dicts2)
+
+        json_data = json.dumps(data_dicts2)
         print("@@@@@@@@@@@@@@@")
-        print(cur)
+        print(json_data)
+
+        # Close the cursor and the database connection
+        # cur.close()
+        # conn.close()
+
+        # Use the JSON data as desired
+        # print(json_data)
         
         # print(type(dbColumnCount.description))
         # for i in dbColumnCount.description:
@@ -52,7 +81,7 @@ class api_test(APIView):
         #     print(i[0])
         # for i in cur2:
         #     print(cur.description[i][0])
-        return Response(cur)
+        return Response(json_data)
     
     
 
