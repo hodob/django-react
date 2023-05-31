@@ -13,6 +13,7 @@ from rest_framework.views import APIView
 
 import psycopg
 import json, datetime
+from rest_framework.renderers import JSONRenderer
 conn = psycopg.connect(host='jjjteam.duckdns.org',dbname='tp_db',user='postgres',password='wjdgh7578@',port=5432)
 
 
@@ -55,33 +56,18 @@ class api_test(APIView):
                 #     row_list[row_list.index(i)]=str(i)
                 row_list[row_list.index(i)]=str(i)
             row=tuple(row_list)
-            print(row)
+            # print(row)
             data_dicts2 = dict(zip(columns, row))
-        print(data_dicts2)
+        # print(data_dicts2)
 
-        json_data = json.dumps(data_dicts2)
-        print("@@@@@@@@@@@@@@@")
-        print(json_data)
-
-        # Close the cursor and the database connection
-        # cur.close()
-        # conn.close()
-
-        # Use the JSON data as desired
+        # json_data = json.dumps(data_dicts2)
+        # print("@@@@@@@@@@@@@@@")
         # print(json_data)
-        
-        # print(type(dbColumnCount.description))
-        # for i in dbColumnCount.description:
-        #     print("@@@@@@@@@@@")
-        #     print(type(i))
-        #     print(i.)
-        #     print("###########")
-        # print(dbColumnCount.description[0][1])
-        # for i in dbColumnCount:
-        #     print(i[0])
-        # for i in cur2:
-        #     print(cur.description[i][0])
-        return Response(json_data)
+ 
+        aaa= JSONRenderer().render(data_dicts2)	# Error : 모델 타입 미지원
+        print(data_dicts)
+
+        return Response(data_dicts)
     
     
 
