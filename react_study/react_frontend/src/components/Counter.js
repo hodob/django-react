@@ -1,14 +1,18 @@
 import React, { useState } from 'react';
 
 function Counter() {
-  const [number, setNumber] = useState(0);
+  const [number, setNumber2] = useState(0);
+//   배열 비구조화 할당 통해서 위 코드로 가능
+// const numberState = useState(0);
+// const number = numberState[0];
+// const setNumber = numberState[1];
 
   const onIncrease = () => {
-    setNumber(number + 1);
+    setNumber2(number + 1);
   }
 
   const onDecrease = () => {
-    setNumber(number - 1);
+    setNumber2(number - 1);
   }
 
   return (
