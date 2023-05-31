@@ -6,19 +6,6 @@ import { useState } from 'react';
 
 
 function App() {
-
-
-  return (
-    <>
-            <h1>Counters that update separately</h1>
-      <MyButton />
-      <MyButton />
-    </>
-  );
-}
-export default App;
-
-function MyButton() {
   const [count, setCount] = useState(0);
 
   function handleClick() {
@@ -26,7 +13,20 @@ function MyButton() {
   }
 
   return (
-    <button onClick={handleClick}>
+    <>
+            <h1>Counters that update separately</h1>
+      <MyButton count={count} onClick={handleClick}/>
+      <MyButton count={count} onClick={handleClick}/>
+    </>
+  );
+}
+export default App;
+
+function MyButton({count,onClick}) {
+ 
+
+  return (
+    <button onClick={onClick}>
       Clicked {count} times
     </button>
   );
