@@ -6,14 +6,28 @@ import { useState } from 'react';
 
 
 function App() {
-  function handleClick() {
-    alert("Button clicked");
-  }
+
 
   return (
     <>
-      <button onClick={handleClick}>Click me</button>
+            <h1>Counters that update separately</h1>
+      <MyButton />
+      <MyButton />
     </>
   );
 }
 export default App;
+
+function MyButton() {
+  const [count, setCount] = useState(0);
+
+  function handleClick() {
+    setCount(count + 1);
+  }
+
+  return (
+    <button onClick={handleClick}>
+      Clicked {count} times
+    </button>
+  );
+}
