@@ -3,7 +3,7 @@ import { useState } from 'react';
 import Hello from './components/hello';
 import Css from './components/css';
 import Props from './components/props';
-
+import Wrapper from './components/Wrapper';
 
 
 
@@ -19,6 +19,10 @@ function App() {
       <Css />
       <h1>Props</h1>
       <Props name="v프롭티스트" age="20" />
+      <Wrapper>
+        <Hello name="react" color="red"/>
+        <Hello color="pink"/>
+      </Wrapper>
     </>
   );
 }
