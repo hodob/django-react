@@ -20,12 +20,25 @@ const products = [
 ];
 
 function App() {
+  const listItems = products.map((product) => (
+    <li 
+      key={product.id}
+      style={{ color: product.isFruit ? 'red' : 'green' }}
+    >
+    {product.title}
+      </li>
+  ));
+
   return (
-    <div>
-      <h1>{user.name}</h1>
+    <>
+      {/* <h1>{user.name}</h1>
       <img src={user.imageUrl} alt={user.name} width={user.imageSize} />
-      <MyButton />
-    </div>
+      <MyButton /> */}
+      <ul>
+        <h1> test</h1>
+        {listItems}
+      </ul>
+    </>
   );
 }
 export default App;
