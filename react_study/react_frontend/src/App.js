@@ -21,7 +21,7 @@ function App() {
       <Props name="v프롭티스트" age="20" />
       <Wrapper>
         <Hello name="react" color="red" isSpecial={true}/>
-        <Hello color="pink"/>
+        <Hello color="pink" isSpecial/>
       </Wrapper>
     </>
   );
