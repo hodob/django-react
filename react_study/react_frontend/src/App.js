@@ -20,19 +20,22 @@ function App() {
   const [users,  setUsers] = useState([
     {
       id: 1,
-      username: "velopert",
-      email: "public.velopert@gmail.com",
+      username: 'velopert',
+      email: 'public.velopert@gmail.com',
+      active: true
     },
     {
       id: 2,
-      username: "tester",
-      email: "tester@example.com",
+      username: 'tester',
+      email: 'tester@example.com',
+      active: false
     },
     {
       id: 3,
-      username: "liz",
-      email: "liz@example.com",
-    },
+      username: 'liz',
+      email: 'liz@example.com',
+      active: false
+    }
   ]);
   const nextId = useRef(4);
   const onCreate = () => {
@@ -59,6 +62,14 @@ function App() {
     // = user.id 가 id 인 것을 제거함
     setUsers(users.filter(user => user.id !== id));
   };
+  const onToggle = id => {
+    console.log(id);
+    setUsers(
+      users.map(user =>
+        user.id === id ? { ...user, active: !user.active } : user
+      )
+    );
+  };
 
   return (
     <div>
@@ -71,6 +82,7 @@ function App() {
       />
       <UserList users={users}
       onRemove={onRemove}
+      onToggle={onToggle}
       />
     </div>
   );
