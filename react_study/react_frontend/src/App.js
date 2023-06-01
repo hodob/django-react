@@ -1,15 +1,10 @@
 
-import React, { useRef, useState , useEffect} from "react";
+import React, { useRef, useState } from "react";
 import UserList from "./components/UserList";
 import CreateUser from "./components/CreateUser";
 
 function App() {
-  useEffect(() => {
-    console.log('컴포넌트가 화면에 나타남');
-    return () => {
-      console.log('컴포넌트가 화면에서 사라짐');
-    };
-  }, []);
+
   const [inputs, setInputs] = useState({
     username: '',
     email: ''

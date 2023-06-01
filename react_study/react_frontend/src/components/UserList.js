@@ -7,6 +7,23 @@ function User({ user, onRemove , onToggle}) {
     //       console.log('컴포넌트가 화면에서 사라짐');
     //     };
     //   }, []);
+// 
+    // deps 에 특정 값 넣기
+// 
+    // useEffect(() => {
+    //     console.log('user 값이 설정됨');
+    //     console.log(user);
+    //     return () => {
+    //       console.log('user 가 바뀌기 전..');
+    //       console.log(user);
+    //     };
+    //   }, [user]);
+// 
+// deps 파라미터를 생략하기
+// 
+     useEffect(() => {
+    console.log(user);
+  });
   return (
     <div>
       <b
