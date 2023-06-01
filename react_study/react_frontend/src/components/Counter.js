@@ -1,19 +1,26 @@
-import React, { useState } from 'react';
+import React, { useReducer } from 'react';
+
+function reducer(state, action) {
+  switch (action.type) {
+    case 'INCREMENT2':
+      return state + 1;
+    case 'DECREMENT':
+      return state - 1;
+    default:
+      return state;
+  }
+}
 
 function Counter() {
-  const [number, setNumber2] = useState(0);
-//   배열 비구조화 할당 통해서 위 코드로 가능
-// const numberState = useState(0);
-// const number = numberState[0];
-// const setNumber = numberState[1];
+  const [number, dispatch] = useReducer(reducer, 0);
 
   const onIncrease = () => {
-    setNumber2(number + 1);
-  }
+    dispatch({ type: 'INCREMENT2' });
+  };
 
   const onDecrease = () => {
-    setNumber2(number - 1);
-  }
+    dispatch({ type: 'DECREMENT' });
+  };
 
   return (
     <div>
