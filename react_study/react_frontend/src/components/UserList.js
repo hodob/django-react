@@ -21,9 +21,9 @@ function User({ user, onRemove , onToggle}) {
 // 
 // deps 파라미터를 생략하기
 // 
-     useEffect(() => {
-    console.log(user);
-  });
+//      useEffect(() => {
+//     console.log(user);
+//   });
   return (
     <div>
       <b
