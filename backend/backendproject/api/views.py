@@ -12,7 +12,6 @@ from rest_framework.views import APIView
 # from .dbconn import cursor2
 
 import psycopg
-import json, datetime
 from rest_framework.renderers import JSONRenderer
 conn = psycopg.connect(host='jjjteam.duckdns.org',dbname='tp_db',user='postgres',password='wjdgh7578@',port=5432)
 
@@ -20,11 +19,8 @@ conn = psycopg.connect(host='jjjteam.duckdns.org',dbname='tp_db',user='postgres'
 
 #  단순 숫자만 바꾸는거
 class inu_obs_mi_data(APIView):
-    
-    
     def get(self, request, format=None):
         cur=conn.cursor()
-        message = "2"
         print(cur.execute("SELECT * FROM public.inu_obs_mi ORDER BY pk_id ASC LIMIT 100"))
         return Response(cur)
 
@@ -32,23 +28,18 @@ class inu_obs_mi_data(APIView):
 class api_test(APIView):
     def get(self, request, format=None):
         cur=conn.cursor()
-        cur2=conn.cursor()
+        
         tm1 = request.GET['tm1']
         tm2 = request.GET['tm2']
-        # select_data = str("SELECT * FROM public.inu_obs_mi ORDER BY pk_id ASC LIMIT 100  " %(tm1))
         select_data = str("SELECT * FROM public.inu_obs_mi WHERE obs_time BETWEEN '%s' AND '%s' ; " %(tm1,tm2))
         # SELECT * FROM public.inu_obs_mi WHERE obs_time BETWEEN '2022-07-22 17:50:45.629947' AND '2022-07-22 17:51:35.803452' ;
         cur.execute(select_data)
-        cur2.execute(select_data)
-        # dbColumnCount = cur2.execute("SELECT count(*) AS column_count FROM information_schema.columns WHERE table_schema = 'public' AND table_name = 'inu_obs_mi';")
-        # print("@@@@@@@@@@@@@@@")
         data = cur.fetchall()
-        # print(data)
 
         # Convert the data to a list of dictionaries
         columns = [desc[0] for desc in cur.description]
+        print(columns)
         data_dicts = [dict(zip(columns, row)) for row in data]
-        test_count = 0
         for row in data:
             row_list = list(row)
             for i in row_list:
@@ -56,16 +47,7 @@ class api_test(APIView):
                 #     row_list[row_list.index(i)]=str(i)
                 row_list[row_list.index(i)]=str(i)
             row=tuple(row_list)
-            # print(row)
-            data_dicts2 = dict(zip(columns, row))
-        # print(data_dicts2)
-
-        # json_data = json.dumps(data_dicts2)
-        # print("@@@@@@@@@@@@@@@")
-        # print(json_data)
- 
-        aaa= JSONRenderer().render(data_dicts2)	# Error : 모델 타입 미지원
-        print(data_dicts)
+        cur.close()
 
         return Response(data_dicts)
     
