@@ -55,6 +55,8 @@ function App() {
   
   const [state, dispatch] = useReducer(reducer,initialState)
   const {username, email} = state.inputs;
+  const {users} = state
+  console.log(...state)
   
   const onChange = (e) =>{
     const{name, value} = e.target;
@@ -68,17 +70,17 @@ function App() {
   return (
     <div>
       <CreateUser
-        // username={username}
-        // email={email}
+        username={username}
+        email={email}
         onChange={onChange}
         // onCreate={onCreate}
         
       />
-      {/* <UserList 
-      // users={users}
+      <UserList 
+      users={users}
       // onRemove={onRemove}
       // onToggle={onToggle}
-      /> */}
+      />
       {/* <div>활성사용자 수 : {count}</div> */}
     </div>
     
