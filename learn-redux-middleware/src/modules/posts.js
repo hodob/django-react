@@ -39,6 +39,7 @@ export default function posts(state = initialState, action) {
     case GET_POST_SUCCESS:
     case GET_POST_ERROR:
       return handleAsyncActionsById(GET_POST, 'post')(state, action);
+    // return handleAsyncActionsById(GET_POST, 'post', true)(state, action); // 이건 요청하지만 로딩중 숨기기
     default:
       return state;
   }
