@@ -2,7 +2,9 @@ import * as postsAPI from '../api/posts'; // api/posts 안의 함수 모두 불�
 import {
   createPromiseThunk,
   reducerUtils,
-  handleAsyncActions
+  handleAsyncActions,
+  createPromiseThunkById,
+  handleAsyncActionsById
 } from '../lib/asyncUtils';
 
 /* 액션 타입 */
@@ -19,12 +21,12 @@ const GET_POST_ERROR = 'GET_POST_ERROR';
 
 // 아주 쉽게 thunk 함수를 만들 수 있게 되었습니다.
 export const getPosts = createPromiseThunk(GET_POSTS, postsAPI.getPosts);
-export const getPost = createPromiseThunk(GET_POST, postsAPI.getPostById);
+export const getPost = createPromiseThunkById(GET_POST, postsAPI.getPostById);
 
 // initialState 쪽도 반복되는 코드를 initial() 함수를 사용해서 리팩토링 했습니다.
 const initialState = {
   posts: reducerUtils.initial(),
-  post: reducerUtils.initial()
+  post: {}
 };
 
 export default function posts(state = initialState, action) {
@@ -32,13 +34,11 @@ export default function posts(state = initialState, action) {
     case GET_POSTS:
     case GET_POSTS_SUCCESS:
     case GET_POSTS_ERROR:
-    //   return handleAsyncActions(GET_POSTS, 'posts')(state, action);
-    const postsReducer = handleAsyncActions(GET_POSTS, 'posts', true);
-    return postsReducer(state, action);
+      return handleAsyncActions(GET_POSTS, 'posts', true)(state, action);
     case GET_POST:
     case GET_POST_SUCCESS:
     case GET_POST_ERROR:
-      return handleAsyncActions(GET_POST, 'post')(state, action);
+      return handleAsyncActionsById(GET_POST, 'post')(state, action);
     default:
       return state;
   }
