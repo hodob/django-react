@@ -1,8 +1,8 @@
 import React from 'react';
-import Greetings from './Greetings';
+import ReducerSample from './ReducerSample';
 
 const App: React.FC = () => {
-  return <Greetings name="Hello" />;
+  return <ReducerSample />;
 };
 
 export default App;
